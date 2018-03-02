@@ -1,0 +1,21 @@
+<div class="products-list">
+  <mat-card>
+
+    <div class="products" *ngIf="data.length">
+      <div class="product-detail" *ngFor="let product of data">
+        <p>id: {{product.id}}</p>
+        <p>title: {{product.title}}</p>
+        <p>description: {{product.description}}</p>
+        <p>price: {{product.price}}</p>
+      </div>
+    </div>
+
+    <div class="loader" *ngIf="isLoadingData">
+      <mat-spinner diameter="50" color="primary"></mat-spinner>
+    </div>
+
+    <div class="not-found" *ngIf="!isLoadingData && !data.length">
+      <p>Товары не найдены</p>
+    </div>
+  </mat-card>
+</div>

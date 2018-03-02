@@ -1,0 +1,23 @@
+mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.wide-menu {
+  display: block;
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
+}
+
+.narrow-menu {
+  display: none;
+  @media screen and (max-width: 600px) {
+    display: block;
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

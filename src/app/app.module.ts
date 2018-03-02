@@ -5,6 +5,8 @@ import { CookieModule, CookieService } from 'ngx-cookie';
 
 import { AppRoutingModule } from './app.routing.module';
 
+import { MatCardModule } from '@angular/material';
+
 import { AppComponent } from './app.component';
 import { NotFoundComponent } from './pages/private/not-found/not-found.component';
 
@@ -20,7 +22,8 @@ import { AuthService } from './common/services/auth/auth.service';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    CookieModule.forRoot()
+    CookieModule.forRoot(),
+    MatCardModule
   ],
   providers: [
     CookieService,

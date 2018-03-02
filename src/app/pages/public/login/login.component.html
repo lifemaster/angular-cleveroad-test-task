@@ -1,3 +1,29 @@
-<p>
-  login works!
-</p>
+<div class="login-form">
+  <mat-card>
+    <mat-toolbar color="primary" role="header">
+      <h1>Авторизация</h1>
+    </mat-toolbar>
+
+    <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="E-mail" type="email" formControlName="email">
+        <mat-error *ngIf="loginForm.controls.email.invalid">
+          Неверный формат e-mail
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Пароль" type="password" formControlName="password">
+        <mat-error *ngIf="loginForm.controls.password.invalid">
+          Пароль должен иметь длину от 6 до 16 символов и содержать символы: A-Z, a-z, 0-9
+        </mat-error>
+      </mat-form-field>
+
+      <mat-checkbox color="primary" formControlName="rememberMe">Remeber me</mat-checkbox>
+
+      <div class="btn-container">
+        <button mat-raised-button type="submit" color="primary" [disabled]="loginForm.invalid">Войти</button>
+      </div>
+    </form>
+  </mat-card>
+</div>

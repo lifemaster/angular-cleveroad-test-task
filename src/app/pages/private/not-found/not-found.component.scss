@@ -1,0 +1,29 @@
+.not-found {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 20px;
+  @media screen and (max-width: 600px) {
+    padding: 10px;
+  }
+}
+
+mat-card {
+  width: 460px;
+  max-width: 460px;
+}
+
+h1 {
+  width: 100%;
+  font-size: 18px;
+  text-align: center;
+}
+
+.not-found-content {
+  p {
+    a {
+      
+    }
+  }
+}

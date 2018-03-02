@@ -1,0 +1,18 @@
+app-main-nav {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+}
+
+main {
+  width: 100%;
+  height: calc(100% - 64px);
+  position: fixed;
+  top: 64px;
+  overflow: auto;
+  @media screen and (max-width: 599px) {
+    height: calc(100% - 56px);
+    top: 56px;
+  }
+}

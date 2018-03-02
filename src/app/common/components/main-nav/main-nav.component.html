@@ -1,0 +1,35 @@
+<mat-toolbar color="primary" class="mat-elevation-z6" role="toolbar">
+
+  <div class="title">
+    <a routerLink="/">Angular App</a>
+  </div>
+
+  <nav>
+    <div class="wide-menu">
+      <!-- <a routerLink="/not-found">
+        <button mat-button>Not found</button>
+      </a> -->
+      <a routerLink="/profile">
+        <button mat-button>Профиль</button>
+      </a>
+      <button mat-button (click)="logout()">Выход</button>
+    </div>
+
+    <div class="narrow-menu">
+      <button mat-icon-button [matMenuTriggerFor]="profileMenu">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <mat-menu #profileMenu="matMenu">
+        <!-- <a routerLink="/not-found">
+          <button mat-menu-item>Not found</button>
+        </a> -->
+        <a routerLink="/profile">
+          <button mat-menu-item>Профиль</button>
+        </a>
+        <button mat-menu-item (click)="logout()">Выход</button>
+      </mat-menu>
+    </div>
+  </nav>
+
+</mat-toolbar>
