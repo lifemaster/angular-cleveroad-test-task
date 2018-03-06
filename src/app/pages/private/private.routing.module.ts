@@ -10,8 +10,8 @@ import { AuthGuardService } from '../../common/services/auth.guard/auth.guard.se
 const routes: Routes = [
   {
     path: '', component: PrivateComponent, children: [
-      { path: '', component: MainPageComponent, canActivate: [AuthGuardService] },
-      { path: 'profile', component: UserProfileComponent, canActivate: [AuthGuardService] }
+      { path: '', component: MainPageComponent, pathMatch: 'all' },
+      { path: 'profile', component: UserProfileComponent }
     ]
   }
 ];

@@ -14,7 +14,7 @@ export class AuthService {
 
   login() {
     this._cookieService.put('token', 'secret');
-    this._router.navigate(['']);
+    this._router.navigate(['/private']);
   }
 
   logout() {

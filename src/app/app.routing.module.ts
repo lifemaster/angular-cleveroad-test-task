@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { NotFoundComponent } from './pages/private/not-found/not-found.component';
+import { NotFoundComponent } from './pages/public/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', loadChildren: 'app/pages/pages.module#PagesModule' },
