@@ -1,12 +1,73 @@
 <div class="products-list">
   <mat-card>
 
-    <div class="products" *ngIf="data.length">
-      <div class="product-detail" *ngFor="let product of data">
-        <p>id: {{product.id}}</p>
-        <p>title: {{product.title}}</p>
-        <p>description: {{product.description}}</p>
-        <p>price: {{product.price}}</p>
+    <div class="products" *ngIf="!isLoadingData && dataSource?.data.length">
+
+      <!-- Buttons  -->
+      <div class="buttons-container">
+        <button mat-raised-button color="primary">Создать товар</button>
+        <button *ngIf="selection.selected.length" mat-raised-button color="warn">Удалить</button>
+      </div>
+
+      <mat-table #table [dataSource]="dataSource">
+
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+          <mat-header-cell *matHeaderCellDef>
+            <mat-checkbox
+              color="primary"
+              (change)="$event ? masterToggle() : null"
+              [checked]="selection.hasValue() && isAllSelected()"
+              [indeterminate]="selection.hasValue() && !isAllSelected()">
+            </mat-checkbox>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <mat-checkbox
+              color="primary"
+              (click)="$event.stopPropagation()"
+              (change)="$event ? selection.toggle(row) : null"
+              [checked]="selection.isSelected(row)">
+            </mat-checkbox>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Title Column -->
+        <ng-container matColumnDef="title">
+          <mat-header-cell *matHeaderCellDef>Наименование</mat-header-cell>
+          <mat-cell *matCellDef="let item">{{ item.title }}</mat-cell>
+        </ng-container>
+
+        <!-- Price Column -->
+        <ng-container matColumnDef="price">
+          <mat-header-cell *matHeaderCellDef>Цена</mat-header-cell>
+          <mat-cell *matCellDef="let item">{{ item.price }}</mat-cell>
+        </ng-container>
+
+        <!-- Edit buttons Column -->
+        <ng-container matColumnDef="edit">
+          <mat-header-cell *matHeaderCellDef>Редактировать</mat-header-cell>
+          <mat-cell *matCellDef="let item">
+            <button mat-icon-button>
+              <mat-icon aria-label="Edit">edit</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+
+      <mat-paginator
+        #paginator
+        [pageSize]="10"
+        [pageSizeOptions]="[10, 20, 50]"
+        [showFirstLastButtons]="true">
+      </mat-paginator>
+
+      <!-- Buttons  -->
+      <div class="buttons-container">
+        <button mat-raised-button color="primary">Создать товар</button>
+        <button *ngIf="selection.selected.length" mat-raised-button color="warn">Удалить</button>
       </div>
     </div>
 
@@ -14,8 +75,8 @@
       <mat-spinner diameter="50" color="primary"></mat-spinner>
     </div>
 
-    <div class="not-found" *ngIf="!isLoadingData && !data.length">
-      <p>Товары не найдены</p>
+    <div class="not-found" *ngIf="!isLoadingData && !dataSource?.data.length">
+      <p>Товары не найдены. Вы можете <a routerLink="">добавить товар</a></p>
     </div>
   </mat-card>
 </div>

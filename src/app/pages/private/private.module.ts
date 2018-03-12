@@ -12,7 +12,10 @@ import {
   MatIconModule,
   MatMenuModule,
   MatProgressSpinnerModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatCheckboxModule
 } from '@angular/material';
 
 import { PrivateComponent } from './private.component';
@@ -37,7 +40,10 @@ import { ProductsService } from '../../common/services/products/products.service
     MatIconModule,
     MatMenuModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatCheckboxModule
   ],
   declarations: [
     PrivateComponent,
@@ -45,7 +51,7 @@ import { ProductsService } from '../../common/services/products/products.service
     MainPageComponent,
     UserInfoComponent,
     ProductsListComponent,
-    UserProfileComponent
+    UserProfileComponent,
   ],
   providers: [
     ProductsService
