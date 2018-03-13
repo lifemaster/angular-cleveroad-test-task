@@ -12,6 +12,7 @@ import { NotFoundComponent } from './pages/public/not-found/not-found.component'
 
 import { AuthGuardService } from './common/services/auth.guard/auth.guard.service';
 import { AuthService } from './common/services/auth/auth.service';
+import { UserInfoService } from './common/services/user.info/user.info.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { AuthService } from './common/services/auth/auth.service';
   providers: [
     CookieService,
     AuthService,
-    AuthGuardService
+    AuthGuardService,
+    UserInfoService
   ],
   bootstrap: [AppComponent]
 })

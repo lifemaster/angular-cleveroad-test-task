@@ -1,7 +1,14 @@
 <div class="user-info">
   <mat-card>
     <h1>Информация о пользователе</h1>
-    <p>Имя: <span>Костя Шийка</span></p>
-    <p>Email: <span>kostya.shyika@gmail.com</span></p>
+
+    <div class="user-details" *ngIf="!isLoadingData && userInfo">
+      <p>Имя: <span>{{userInfo.firstName}} {{userInfo.lastName}}</span></p>
+      <p>Email: <span>{{ userInfo.email }}</span></p>
+    </div>
+
+    <div class="loader" *ngIf="isLoadingData">
+      <mat-spinner diameter="50" color="primary"></mat-spinner>
+    </div>
   </mat-card>
 </div>

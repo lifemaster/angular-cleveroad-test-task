@@ -2,7 +2,7 @@
   <mat-card>
     <h1>Профиль</h1>
 
-    <form [formGroup]="profileForm" (ngSubmit)="submitForm()">
+    <form [formGroup]="profileForm" (ngSubmit)="submitForm()" *ngIf="!isLoadingData">
       <mat-form-field class="full-width">
         <input matInput placeholder="Имя*" type="text" formControlName="firstName">
         <mat-error *ngIf="profileForm.controls.firstName.invalid">
@@ -62,6 +62,10 @@
         <button mat-raised-button type="submit" color="primary" [disabled]="profileForm.invalid">Сохранить</button>
       </div>
     </form>
+
+    <div class="loader" *ngIf="isLoadingData">
+      <mat-spinner diameter="50" color="primary"></mat-spinner>
+    </div>
   </mat-card>
 </div>
 
