@@ -1,0 +1,39 @@
+<div class="create-product">
+  <mat-card>
+    <h1>Создание товара</h1>
+
+    <form [formGroup]="createProductForm" (ngSubmit)="submitForm()">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Название товара*" type="text" formControlName="title">
+        <mat-error *ngIf="createProductForm.controls.title.invalid">
+          Длина названия товара должна быть от 1 до 255 символов
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Цена*" type="number" formControlName="price">
+        <mat-error *ngIf="createProductForm.controls.price.invalid">
+          Цена товара должна быть больше нуля и иметь не более 2-х знаков в дробной части
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <textarea
+          matInput
+          placeholder="Описание товара*"
+          formControlName="description"
+          matTextareaAutosize
+          matAutosizeMinRows="2"
+          matAutosizeMaxRows="5">
+        </textarea>
+        <mat-error *ngIf="createProductForm.controls.description.invalid">
+          Длина описания товара должна быть от 1 до 1000 символов
+        </mat-error>
+      </mat-form-field>
+
+      <div class="btn-container">
+        <button mat-raised-button type="submit" color="primary" [disabled]="createProductForm.invalid">Сохранить</button>
+      </div>
+    </form>
+  </mat-card>
+</div>

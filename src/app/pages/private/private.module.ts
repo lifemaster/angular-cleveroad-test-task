@@ -24,6 +24,10 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { UserInfoComponent } from '../../common/components/user-info/user-info.component';
 import { ProductsListComponent } from '../../common/components/products-list/products-list.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { CreateProductComponent } from './create-product/create-product.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
+
+import { DecimalPipe } from '../../common/pipes/decimal/decimal.pipe';
 
 import { ProductsService } from '../../common/services/products/products.service';
 
@@ -52,6 +56,9 @@ import { ProductsService } from '../../common/services/products/products.service
     UserInfoComponent,
     ProductsListComponent,
     UserProfileComponent,
+    CreateProductComponent,
+    EditProductComponent,
+    DecimalPipe
   ],
   providers: [
     ProductsService

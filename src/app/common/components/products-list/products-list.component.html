@@ -5,8 +5,8 @@
 
       <!-- Buttons  -->
       <div class="buttons-container">
-        <button mat-raised-button color="primary">Создать товар</button>
-        <button *ngIf="selection.selected.length" mat-raised-button color="warn">Удалить</button>
+        <button mat-raised-button color="primary" (click)="onCreate()">Создать товар</button>
+        <button *ngIf="selection.selected.length" mat-raised-button color="warn" (click)="onDelete()">Удалить</button>
       </div>
 
       <mat-table #table [dataSource]="dataSource">
@@ -40,14 +40,14 @@
         <!-- Price Column -->
         <ng-container matColumnDef="price">
           <mat-header-cell *matHeaderCellDef>Цена</mat-header-cell>
-          <mat-cell *matCellDef="let item">{{ item.price }}</mat-cell>
+          <mat-cell *matCellDef="let item">{{ item.price | decimal }}</mat-cell>
         </ng-container>
 
         <!-- Edit buttons Column -->
         <ng-container matColumnDef="edit">
           <mat-header-cell *matHeaderCellDef>Редактировать</mat-header-cell>
           <mat-cell *matCellDef="let item">
-            <button mat-icon-button>
+            <button mat-icon-button (click)="onEdit(item.id)">
               <mat-icon aria-label="Edit">edit</mat-icon>
             </button>
           </mat-cell>
@@ -66,8 +66,8 @@
 
       <!-- Buttons  -->
       <div class="buttons-container">
-        <button mat-raised-button color="primary">Создать товар</button>
-        <button *ngIf="selection.selected.length" mat-raised-button color="warn">Удалить</button>
+        <button mat-raised-button color="primary" (click)="onCreate()">Создать товар</button>
+        <button *ngIf="selection.selected.length" mat-raised-button color="warn" (click)="onDelete()">Удалить</button>
       </div>
     </div>
 
@@ -76,7 +76,7 @@
     </div>
 
     <div class="not-found" *ngIf="!isLoadingData && !dataSource?.data.length">
-      <p>Товары не найдены. Вы можете <a routerLink="">добавить товар</a></p>
+      <p>Товары не найдены. Вы можете <a routerLink="/private/product/create">добавить товар</a></p>
     </div>
   </mat-card>
 </div>

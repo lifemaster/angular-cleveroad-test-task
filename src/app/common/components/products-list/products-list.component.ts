@@ -51,4 +51,18 @@ export class ProductsListComponent implements OnInit, OnDestroy {
         this.selection.clear() :
         this.dataSource.data.forEach(row => this.selection.select(row));
   }
+
+  onCreate() {
+    this._router.navigate(['/private/product/create']);
+  }
+
+  onEdit(id) {
+    this._router.navigate([`/private/product/edit/${id}`]);
+  }
+
+  onDelete() {
+    const ids = this.selection.selected.map(product => product.id);
+    this._productsService.removeProducts(ids);
+    this.selection.clear();
+  }
 }

@@ -1,4 +1,4 @@
-.user-info {
+.create-product {
   display: flex;
   justify-content: center;
   padding: 20px;
@@ -14,13 +14,21 @@ mat-card {
     font-size: 18px;
     text-align: center;
   }
-  p {
-    display: flex;
-    justify-content: space-between;
-    span {
-      padding-left: 5px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+textarea {
+  resize: none;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  button {
+    margin: 10px;
   }
 }

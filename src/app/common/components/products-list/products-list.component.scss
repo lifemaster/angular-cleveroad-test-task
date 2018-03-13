@@ -2,6 +2,9 @@
   display: flex;
   justify-content: center;
   padding: 20px;
+  @media screen and (max-width: 600px) {
+    padding: 10px;
+  }
 }
 
 mat-card {
@@ -22,6 +25,13 @@ mat-card {
   display: flex;
   justify-content: center;
   align-content: center;
+}
+
+.mat-header-row,
+.mat-row {
+  @media screen and (max-width: 600px) {
+    padding: 0;
+  }
 }
 
 .mat-cell,

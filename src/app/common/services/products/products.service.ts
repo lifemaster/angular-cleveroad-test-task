@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 export class Product {
-  id: number;
+  id?: number;
   title: string;
   description: string;
   price: number;
@@ -46,6 +46,14 @@ export class ProductsService {
 
   addProduct(product:  Product) {
     const products = this.productsSubject.getValue();
+    const lastId = products.reduce((id, item) => {
+      if (item.id > id) {
+        return item.id;
+      }
+    }, 0);
+
+    product.id = lastId + 1;
+
     products.push(product);
     this.productsSubject.next(products);
   }

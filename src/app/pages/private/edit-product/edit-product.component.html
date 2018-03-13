@@ -1,0 +1,47 @@
+<div class="edit-product">
+  <mat-card>
+    <h1>Редактирование товара</h1>
+
+    <div class="loader" *ngIf="isLoadingData">
+      <mat-spinner diameter="50" color="primary"></mat-spinner>
+    </div>
+
+    <form [formGroup]="editProductForm" (ngSubmit)="submitForm()" *ngIf="!isLoadingData && product">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Название товара*" type="text" formControlName="title">
+        <mat-error *ngIf="editProductForm.controls.title.invalid">
+          Длина названия товара должна быть от 1 до 255 символов
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Цена*" type="number" formControlName="price">
+        <mat-error *ngIf="editProductForm.controls.price.invalid">
+          Цена товара должна быть больше нуля и иметь не более 2-х знаков в дробной части
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <textarea
+          matInput
+          placeholder="Описание товара*"
+          formControlName="description"
+          matTextareaAutosize
+          matAutosizeMinRows="2"
+          matAutosizeMaxRows="5">
+        </textarea>
+        <mat-error *ngIf="editProductForm.controls.description.invalid">
+          Длина описания товара должна быть от 1 до 1000 символов
+        </mat-error>
+      </mat-form-field>
+
+      <div class="btn-container">
+        <button mat-raised-button type="submit" color="primary" [disabled]="editProductForm.invalid">Сохранить</button>
+      </div>
+    </form>
+
+    <div class="not-found" *ngIf="!isLoadingData && !product">
+      <p>Товар не найден</p>
+    </div>
+  </mat-card>
+</div>
