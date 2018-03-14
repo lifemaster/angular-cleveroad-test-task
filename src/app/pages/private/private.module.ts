@@ -12,7 +12,6 @@ import {
   MatIconModule,
   MatMenuModule,
   MatProgressSpinnerModule,
-  MatSnackBarModule,
   MatTableModule,
   MatPaginatorModule,
   MatCheckboxModule
@@ -44,7 +43,6 @@ import { ProductsService } from '../../common/services/products/products.service
     MatIconModule,
     MatMenuModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule,
     MatTableModule,
     MatPaginatorModule,
     MatCheckboxModule

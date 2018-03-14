@@ -5,7 +5,7 @@ import { CookieModule, CookieService } from 'ngx-cookie';
 
 import { AppRoutingModule } from './app.routing.module';
 
-import { MatCardModule } from '@angular/material';
+import { MatCardModule, MatSnackBarModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { NotFoundComponent } from './pages/public/not-found/not-found.component';
@@ -24,7 +24,8 @@ import { UserInfoService } from './common/services/user.info/user.info.service';
     BrowserAnimationsModule,
     AppRoutingModule,
     CookieModule.forRoot(),
-    MatCardModule
+    MatCardModule,
+    MatSnackBarModule
   ],
   providers: [
     CookieService,

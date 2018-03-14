@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
 
 import { AuthService } from '../../../common/services/auth/auth.service';
+import { UserInfoService } from '../../../common/services/user.info/user.info.service';
 
 @Component({
   selector: 'app-login',
@@ -23,9 +24,18 @@ export class LoginComponent implements OnInit {
     rememberMe: new FormControl(false)
   });
 
-  constructor(private _router: Router, private _authService: AuthService) { }
+  constructor(
+    private _router: Router,
+    private _authService: AuthService,
+    private _userInfoService: UserInfoService,
+    private _snackBar: MatSnackBar
+  ) { }
 
   ngOnInit() { }
+
+  private openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, { duration: 2000 });
+  }
 
   submitForm() {
     if (this.loginForm.invalid) {
@@ -37,9 +47,13 @@ export class LoginComponent implements OnInit {
     const password = controls.password.value;
     const rememberMe = controls.rememberMe.value;
 
-    console.log({ email, password, rememberMe });
+    const userInfo = this._userInfoService.userInfoSubject.getValue();
 
-    this._authService.login();
+    if (email === userInfo.email && password === userInfo.password) {
+      this._authService.login();
+    } else {
+      this.openSnackBar('Неверные email и/или пароль', 'Закрыть');
+    }
   }
 
 }
