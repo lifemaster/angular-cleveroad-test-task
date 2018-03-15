@@ -14,7 +14,8 @@ import {
   MatProgressSpinnerModule,
   MatTableModule,
   MatPaginatorModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatChipsModule
 } from '@angular/material';
 
 import { PrivateComponent } from './private.component';
@@ -45,7 +46,8 @@ import { ProductsService } from '../../common/services/products/products.service
     MatProgressSpinnerModule,
     MatTableModule,
     MatPaginatorModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatChipsModule
   ],
   declarations: [
     PrivateComponent,

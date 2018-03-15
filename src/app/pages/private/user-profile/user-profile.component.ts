@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 
-import { UserInfoService } from '../../../common/services/user.info/user.info.service';
+import { UserInfoService, UserInfo } from '../../../common/services/user.info/user.info.service';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -27,9 +27,11 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       Validators.email,
       Validators.required
     ]),
-    phone: new FormControl('', Validators.pattern(new RegExp(/^\+380\d{9}$/))),
-    // password: new FormControl('', this.passwordValidator),
-    // confirmPassword: new FormControl('', this.passwordValidator)
+    phone: new FormControl('', Validators.pattern(/^\+380\d{9}$/)),
+    password: new FormControl(''),
+    confirmPassword: new FormControl('')
+  }, {
+    validators: [this.passwordValidator]
   });
 
   showChangePasswordMode = false;
@@ -60,28 +62,51 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this._snackBar.open(message, action, { duration: 2000 });
   }
 
-  // passwordValidator(control: FormControl) {
-  //   if (this.profileForm.controls.password.value !== this.profileForm.controls.confirmPassword.value) {
-  //     return {
-  //       password: true,
-  //       confirmPassword: true
-  //     };
-  //   }
+  showChangePassword() {
+    this.showChangePasswordMode = true;
+  }
 
-  //   return null;
-  // }
+  passwordValidator(formGroup: FormGroup) {
+    const password = formGroup.controls.password.value;
+    const confirmPassword = formGroup.controls.confirmPassword.value;
 
-  // showChangePassword() {
-  //   this.showChangePasswordMode = true;
-  // }
+    if (!password && !confirmPassword) {
+      return null;
+    }
+
+    if (password === confirmPassword && password.length >= 6) {
+      return null;
+    }
+
+    if (password !== confirmPassword) {
+      return {
+        passwordMismatch: true
+      };
+    }
+
+    if (password.length < 6) {
+      return {
+        passwordTooShort: true
+      };
+    }
+
+    return null;
+  }
 
   submitForm() {
     const firstName = this.profileForm.controls.firstName.value;
     const lastName = this.profileForm.controls.lastName.value;
     const email = this.profileForm.controls.email.value;
     const phone = this.profileForm.controls.phone.value;
+    const password = this.profileForm.controls.password.value;
 
-    this._userInfoService.editUserInfo({ firstName, lastName, email, phone });
+    const userInfo: UserInfo = { firstName, lastName, email, phone };
+
+    if (password) {
+      userInfo.password = password;
+    }
+
+    this._userInfoService.editUserInfo(userInfo);
     this.openSnackBar('Данные сохранены', 'Закрыть');
   }
 }

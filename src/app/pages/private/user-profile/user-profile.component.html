@@ -31,7 +31,7 @@
         </mat-error>
       </mat-form-field>
 
-      <!-- <div>
+      <div>
         <button
           mat-raised-button
           type="button"
@@ -44,19 +44,23 @@
         <div class="password-fields" *ngIf="showChangePasswordMode">
           <mat-form-field class="full-width">
             <input matInput placeholder="Новый пароль" type="password" formControlName="password">
-            <mat-error *ngIf="profileForm.controls.password.invalid">
-              Пароли не совпадают
-            </mat-error>
           </mat-form-field>
 
           <mat-form-field class="full-width">
             <input matInput placeholder="Повторите новый пароль" type="password" formControlName="confirmPassword">
-            <mat-error *ngIf="profileForm.controls.confirmPassword.invalid">
-              Пароли не совпадают
-            </mat-error>
           </mat-form-field>
+
+          <mat-chip-list>
+            <mat-chip color="warn" selected="true" *ngIf="profileForm.errors?.passwordMismatch">
+              Пароли не совпадают
+            </mat-chip>
+
+            <mat-chip color="warn" selected="true" *ngIf="profileForm.errors?.passwordTooShort">
+              Пароль должен состоят не менее, чем из 6 символов
+            </mat-chip>
+          </mat-chip-list>
         </div>
-      </div> -->
+      </div>
 
       <div class="btn-container">
         <button mat-raised-button type="submit" color="primary" [disabled]="profileForm.invalid">Сохранить</button>
