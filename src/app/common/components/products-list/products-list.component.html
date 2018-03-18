@@ -53,8 +53,39 @@
           </mat-cell>
         </ng-container>
 
+        <!-- Description -->
+        <ng-container matColumnDef="description">
+          <mat-cell *matCellDef="let item" class="description">
+            {{ item.element.description }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Expanded/Collapsed mode -->
+        <ng-container matColumnDef="expandCollapse">
+          <mat-header-cell *matHeaderCellDef>
+            <button mat-icon-button style="visibility: hidden;">
+              <mat-icon></mat-icon>
+            </button>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <button mat-icon-button (click)="rowClickHandler($event, row)">
+              <mat-icon>{{ expandedElement == row ? 'arrow_drop_up' : 'arrow_drop_down' }}</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <mat-row
+          *matRowDef="let row; columns: displayedColumns;"
+          class="element-row"
+          [class.expanded]="expandedElement == row">
+        </mat-row>
+
+        <mat-row
+          *matRowDef="let row; columns: ['description']; when: isExpansionDetailRow"
+          [@detailExpand]="row.element == expandedElement ? 'expanded' : 'collapsed'"
+          style="overflow: hidden">
+        </mat-row>
       </mat-table>
 
       <mat-paginator

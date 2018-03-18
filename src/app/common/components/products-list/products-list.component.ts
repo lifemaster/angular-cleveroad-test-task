@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Router } from '@angular/router';
@@ -9,13 +10,20 @@ import { Subscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-products-list',
   templateUrl: './products-list.component.html',
-  styleUrls: ['./products-list.component.scss']
+  styleUrls: ['./products-list.component.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({ height: '0px', minHeight: '0', visibility: 'hidden' })),
+      state('expanded', style({ height: '*', visibility: 'visible' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ]
 })
 export class ProductsListComponent implements OnInit, OnDestroy {
   isLoadingData = true;
-
-  displayedColumns = ['select', 'title', 'price', 'edit'];
-  dataSource: MatTableDataSource<Product> = new MatTableDataSource<Product>([]);
+  expandedElement: Product = null;
+  displayedColumns = ['expandCollapse', 'select', 'title', 'price', 'edit'];
+  dataSource: MatTableDataSource<any> = new MatTableDataSource();
   selection = new SelectionModel<Product>(true, []);
 
   subscriptions: Subscription[] = [];
@@ -25,8 +33,12 @@ export class ProductsListComponent implements OnInit, OnDestroy {
   constructor(private _productsService: ProductsService, private _router: Router) {
     this.subscriptions.push(this._productsService.productsSubject. subscribe(data => {
       if (data) {
+        const mappedData = [];
+
+        data.forEach(el => mappedData.push(el, { detailRow: true, element: el }));
+        this.dataSource.data = mappedData;
         this.isLoadingData = false;
-        this.dataSource.data = data;
+
         setTimeout(() => this.dataSource.paginator = this.paginator);
       }
     }));
@@ -50,6 +62,18 @@ export class ProductsListComponent implements OnInit, OnDestroy {
     this.isAllSelected() ?
         this.selection.clear() :
         this.dataSource.data.forEach(row => this.selection.select(row));
+  }
+
+  rowClickHandler(e, row) {
+    if (this.expandedElement && this.expandedElement.id === row.id) {
+      this.expandedElement = null;
+    } else {
+      this.expandedElement = row;
+    }
+  }
+
+  isExpansionDetailRow(i, row) {
+    return row.hasOwnProperty('detailRow');
   }
 
   onCreate() {

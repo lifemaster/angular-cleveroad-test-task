@@ -39,8 +39,24 @@ mat-card {
   text-align: center;
 }
 
-.mat-column-select {
+.mat-cell {
+  &.description {
+    text-align: left;
+  }
+}
+
+.mat-column-select,
+.mat-column-expandCollapse {
   flex-grow: 0;
   padding-right: 10px;
   overflow: visible;
+}
+
+.mat-column-title,
+.mat-column-description {
+  padding: 5px;
+}
+
+.element-row.expanded {
+  border-bottom-color: transparent;
 }
